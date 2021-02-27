@@ -7,14 +7,14 @@ bot = commands.Bot(command_prefix="-")
 
 
 @bot.command()
-async def test(context: commands.Context, ability=0, focus=0):
+async def test(context: commands.Context, ability=0, focus=0, bonus_sp=0):
     def roll(): return random.randint(1, 6)
     dice = roll(), roll(), roll()
     doubles = len(set(dice)) != 3
     stunt_points = 0
 
     if doubles:
-        stunt_points = dice[2]
+        stunt_points = dice[2] + bonus_sp
 
     total = sum(dice, ability + focus)
     name = context.author.display_name
